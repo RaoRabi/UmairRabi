@@ -3,52 +3,138 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Muhammad Umair Rabi - AI Engineer</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<title>Muhammad Umair Rabi | AI Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
-body{background:#050805;color:white;overflow-x:hidden}
-canvas#matrix{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;opacity:0.7}
-.nav{position:fixed;top:0;width:100%;padding:20px 6%;display:flex;justify-content:space-between;z-index:10;backdrop-filter:blur(10px);background:rgba(0,0,0,0.4)}
-.nav span{color:#7CFF7A;border:1px solid #7CFF7A;padding:6px 16px;border-radius:20px;font-size:12px;letter-spacing:1px}
-.hero{height:100vh;display:flex;flex-direction:column;justify-content:center;padding:0 6%;position:relative}
-.tag{display:inline-block;border:1px solid #7CFF7A;color:#7CFF7A;padding:8px 18px;border-radius:30px;font-size:13px;letter-spacing:2px;width:fit-content;box-shadow:0 0 15px rgba(124,255,122,0.4)}
-.hero h1{font-size:clamp(40px,8vw,92px);line-height:0.95;margin:25px 0;font-weight:800;letter-spacing:-2px}
-.hero h1 span{color:#7CFF7A}
-.hero p{max-width:650px;color:#b5b5b5;font-size:clamp(16px,2vw,20px);line-height:1.7}
-.btns{margin-top:30px;display:flex;gap:18px;flex-wrap:wrap}
-.btn-primary{background:#7CFF7A;color:black;padding:14px 28px;border-radius:30px;font-weight:700;text-decoration:none;transition:0.3s}
-.btn-primary:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(124,255,122,0.5)}
-.btn-outline{border:1px solid #7CFF7A;color:#7CFF7A;padding:14px 28px;border-radius:30px;font-weight:600;text-decoration:none}
-.cards{padding:0 6%;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:-60px;position:relative;z-index:2}
-.card{background:linear-gradient(180deg,rgba(20,30,20,0.9),rgba(5,10,5,0.9));border:1px solid rgba(124,255,122,0.3);padding:30px;border-radius:18px;backdrop-filter:blur(20px);transform:translateY(100px);opacity:0;transition:all 0.8s}
-.card.show{transform:translateY(0);opacity:1}
-.section{padding:100px 6%}
-.section h2{font-size:42px;margin-bottom:40px}
-.project-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
-.proj{background:#0f1710;border:1px solid #1e3a1e;padding:24px;border-radius:16px;transform:translateY(50px);opacity:0;transition:0.8s}
-.proj.show{transform:translateY(0);opacity:1}
-.proj h4{color:#7CFF7A;margin-bottom:8px}
-.proj p{color:#999;font-size:14px;line-height:1.6}
-.contact{text-align:center;padding:80px 6%;background:linear-gradient(0deg,#0a1a0a,transparent)}
-.reveal{opacity:0;transform:translateY(30px);transition:0.8s}
-.reveal.show{opacity:1;transform:translateY(0)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:#070A0A;color:#E5E7EB;font-family:'Space Grotesk',sans-serif;overflow-x:hidden}
+canvas#matrix{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;opacity:0.13}
+/* Top Bar */
+.navbar{position:fixed;top:0;width:100%;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:16px 24px;background:rgba(7,10,10,0.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(108,255,122,0.15)}
+.logo{border:1px solid #6CFF7A;color:#6CFF7A;padding:6px 14px;border-radius:20px;font-size:11px;letter-spacing:1.2px;font-family:'JetBrains Mono',monospace}
+.hamburger{width:42px;height:42px;border:1px solid rgba(108,255,122,0.3);border-radius:10px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;cursor:pointer;background:rgba(108,255,122,0.05)}
+.hamburger span{width:18px;height:2px;background:#6CFF7A;border-radius:2px;transition:0.3s}
+/* Side Menu */
+.side-menu{position:fixed;top:0;right:-100%;width:78%;max-width:320px;height:100vh;background:#0E1414;border-left:1px solid rgba(108,255,122,0.2);z-index:200;padding:30px 28px;transition:0.4s ease;box-shadow:-20px 0 60px rgba(0,0,0,0.6)}
+.side-menu.open{right:0}
+.side-menu .close{font-size:28px;color:#6CFF7A;cursor:pointer;text-align:right;margin-bottom:30px}
+.side-menu a{display:block;color:#9CA3AF;text-decoration:none;font-size:18px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.06);transition:0.2s}
+.side-menu a:hover{color:#6CFF7A;padding-left:10px}
+.side-menu a span{color:#6CFF7A;font-family:'JetBrains Mono',monospace;margin-right:10px;font-size:14px}
+.overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:150;display:none}
+.overlay.show{display:block}
+/* Hero */
+.hero{min-height:100vh;padding:110px 24px 60px 24px;display:flex;flex-direction:column;justify-content:center}
+.badge{display:inline-block;border:1px solid #6CFF7A;color:#6CFF7A;padding:8px 16px;border-radius:24px;font-size:10px;letter-spacing:1px;font-family:'JetBrains Mono',monospace;box-shadow:0 0 20px rgba(108,255,122,0.25);margin-bottom:22px;width:fit-content}
+.hero h1{font-size:44px;line-height:0.9;font-weight:700;color:white}
+.hero h1 span{color:#6CFF7A}
+.hero .sub{color:#9CA3AF;margin-top:18px;font-size:16px;line-height:1.6;max-width:95%}
+.btns{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap}
+.btn-p{background:#6CFF7A;color:#000;padding:14px 26px;border-radius:28px;font-weight:700;text-decoration:none;font-size:14px;box-shadow:0 0 25px rgba(108,255,122,0.3)}
+.btn-s{border:1px solid rgba(108,255,122,0.4);color:#6CFF7A;padding:14px 26px;border-radius:28px;text-decoration:none;font-size:14px;background:rgba(108,255,122,0.05)}
+/* Sections */
+section{padding:70px 24px;opacity:0;transform:translateY(50px);transition:0.9s cubic-bezier(0.16,1,0.3,1)}
+section.show{opacity:1;transform:translateY(0)}
+.section-tag{color:#6CFF7A;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:2px;margin-bottom:12px}
+h2{font-size:34px;font-weight:700;margin-bottom:24px;color:white}
+h2 span{color:#6CFF7A}
+.card{background:linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));border:1px solid rgba(108,255,122,0.15);border-radius:18px;padding:22px;margin-bottom:16px;backdrop-filter:blur(10px)}
+.card h3{color:white;font-size:17px;margin-bottom:8px}
+.card p{color:#9CA3AF;font-size:14px;line-height:1.6}
+.meta{font-family:'JetBrains Mono',monospace;font-size:11px;color:#6CFF7A;margin-bottom:8px}
+.exp-grid{display:flex;gap:12px;margin-top:10px}
+.exp-dot{width:8px;height:8px;background:#6CFF7A;border-radius:50%;margin-top:6px;box-shadow:0 0 10px #6CFF7A}
+.tag{display:inline-block;background:rgba(108,255,122,0.1);border:1px solid rgba(108,255,122,0.2);color:#6CFF7A;padding:5px 12px;border-radius:20px;font-size:11px;margin:4px;font-family:'JetBrains Mono',monospace}
+.contact-box{text-align:center}
+.contact-box a{display:block;margin:10px 0}
 </style>
 </head>
 <body>
 <canvas id="matrix"></canvas>
-<div class="nav"><span>MUHAMMAD UMAIR RABI</span><span style="opacity:0.6">AI ENGINEER</span></div>
-<div class="hero">
-<div class="tag">AI ENGINEER • PYTHON DEVELOPER</div>
-<h1>Hi, I'm Muhammad<br><span>Umair Rabi</span></h1>
-<p>I turn ideas into intelligent Python & AI applications — from chatbots to automation.</p>
+<div class="navbar">
+<div class="logo">MUHAMMAD UMAIR RABI</div>
+<div class="hamburger" onclick="openMenu()"><span></span><span></span><span></span></div>
+</div>
+
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+<div class="side-menu" id="sideMenu">
+<div class="close" onclick="closeMenu()">✕</div>
+<a href="#home" onclick="closeMenu()"><span>01</span> Home</a>
+<a href="#about" onclick="closeMenu()"><span>02</span> About Me</a>
+<a href="#experience" onclick="closeMenu()"><span>03</span> Experience</a>
+<a href="#projects" onclick="closeMenu()"><span>04</span> Projects</a>
+<a href="#skills" onclick="closeMenu()"><span>05</span> Skills</a>
+<a href="#contact" onclick="closeMenu()"><span>06</span> Contact</a>
+<br><br>
+<p style="color:#555;font-size:12px;font-family:'JetBrains Mono',monospace">AI ENGINEER • PYTHON DEV<br>BASED IN LAHORE, PK</p>
+</div>
+
+<div class="hero" id="home">
+<div class="badge">● AVAILABLE FOR NEW PROJECTS</div>
+<h1>Hi, I'm<br>Muhammad<br><span>Umair Rabi</span></h1>
+<p class="sub">I turn ideas into intelligent Python & AI applications — from smart chatbots to automation tools that save 10+ hours every week.</p>
 <div class="btns">
-<a href="#projects" class="btn-primary">View Projects →</a>
-<a href="#" class="btn-outline">↓ Download CV</a>
+<a href="#projects" class="btn-p">View Projects →</a>
+<a href="#contact" class="btn-s">Contact Me</a>
 </div>
 </div>
-<div class="cards">
-<div class="card"><div style="font-size:40px;margin-bottom:20px">🐍</div><h3>Python Development</h3></div>
-<div class="card"><div style="font-size:40px;margin-bottom:20px">🧠</div><h3>AI & Machine Learning</h3></div>
-<div class="card"><div style="font-size:40px;margin-bottom:20px">💬</div><h3>NLP & Chatbots</h3></div>
-<div class="card"><div
+
+<section id="about">
+<div class="section-tag">// 02 — ABOUT ME</div>
+<h2>Who is <span>Umair?</span></h2>
+<div class="card">
+<p>I'm a passionate <span style="color:white">AI Engineer & Python Developer</span> from Lahore. I love solving real-world problems with Artificial Intelligence.</p><br>
+<p>From building LLM-powered chatbots to automating boring tasks, I build products that are fast, intelligent and actually useful.</p><br>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:13px;color:#9CA3AF">
+<div>📍 Lahore, Pakistan</div><div>💼 2+ Years Exp</div><div>🎓 BS Computer Science</div><div>🚀 Freelance Available</div>
+</div>
+</div>
+</section>
+
+<section id="experience">
+<div class="section-tag">// 03 — EXPERIENCE</div>
+<h2>Work <span>Experience</span></h2>
+<div class="card" style="display:flex;gap:12px"><div class="exp-dot"></div><div><div class="meta">2024 — PRESENT • FREELANCE</div><h3>AI Engineer & Automation Expert</h3><p>Building custom chatbots, scraping bots, and AI tools for clients worldwide on Upwork & Fiverr. Delivered 30+ projects.</p><div style="margin-top:10px"><span class="tag">Python</span><span class="tag">OpenAI</span><span class="tag">Automation</span></div></div></div>
+<div class="card" style="display:flex;gap:12px"><div class="exp-dot" style="background:#555;box-shadow:none"></div><div><div class="meta">2023 — 2024 • SELF LEARN</div><h3>Python Developer</h3><p>Mastered FastAPI, Machine Learning, Data Analysis. Built 15+ personal projects and open-source tools.</p><div style="margin-top:10px"><span class="tag">FastAPI</span><span class="tag">ML</span></div></div></div>
+</section>
+
+<section id="projects">
+<div class="section-tag">// 04 — PROJECTS</div>
+<h2>Featured <span>Projects</span></h2>
+<div class="card"><div class="meta">01 / CHATBOT</div><h3>🤖 AI Customer Support Bot</h3><p>24/7 intelligent chatbot using LLM & RAG. Reduces support time by 80%. Used by 3 businesses.</p><br><span class="tag">Python</span><span class="tag">LangChain</span></div>
+<div class="card"><div class="meta">02 / AUTOMATION</div><h3>⚡️ WhatsApp Automation Tool</h3><p>Auto-reply, bulk messaging, and lead management tool. Saves 12 hours/week for marketers.</p><br><span class="tag">Python</span><span class="tag">Selenium</span></div>
+<div class="card"><div class="meta">03 / DATA</div><h3>📊 Smart Data Analyzer</h3><p>Upload CSV → Get AI insights, charts & reports automatically. No coding needed.</p><br><span class="tag">Pandas</span><span class="tag">AI</span></div>
+</section>
+
+<section id="skills">
+<div class="section-tag">// 05 — SKILLS</div>
+<h2>Tech <span>Stack</span></h2>
+<div class="card">
+<p style="margin-bottom:14px;color:#9CA3AF;font-size:13px">Technologies I work with daily:</p>
+<span class="tag">Python</span><span class="tag">AI / Machine Learning</span><span class="tag">OpenAI API</span><span class="tag">LangChain</span><span class="tag">TensorFlow</span><span class="tag">FastAPI</span><span class="tag">JavaScript</span><span class="tag">React</span><span class="tag">Selenium</span><span class="tag">Git & GitHub</span><span class="tag">SQL</span>
+</div>
+</section>
+
+<section id="contact">
+<div class="section-tag">// 06 — CONTACT</div>
+<h2>Let's Build <span>Together</span></h2>
+<div class="card contact-box">
+<p style="color:#9CA3AF;margin-bottom:22px">Have an idea? I can turn it into a real AI product in days, not months.</p>
+<a href="https://wa.me/923000000000" class="btn-p" style="display:block">💬 WhatsApp Me</a>
+<a href="mailto:umairrabi@example.com" class="btn-s" style="display:block;text-align:center">✉️ umairrabi@example.com</a>
+<br>
+<div style="display:flex;justify-content:center;gap:20px;margin-top:20px">
+<a href="https://github.com/RaoRabi" style="color:#6CFF7A;text-decoration:none;font-size:13px">GitHub</a>
+<a href="#" style="color:#6CFF7A;text-decoration:none;font-size:13px">LinkedIn</a>
+<a href="#" style="color:#6CFF7A;text-decoration:none;font-size:13px">Upwork</a>
+</div>
+<br><br><p style="font-size:11px;color:#444;font-family:'JetBrains Mono',monospace">© 2026 MUHAMMAD UMAIR RABI — BUILT WITH 💚 & PYTHON</p>
+</div>
+</section>
+
+<script>
+function openMenu(){document.getElementById('sideMenu').classList.add('open');document.getElementById('overlay').classList.add('show')}
+function closeMenu(){document.getElementById('sideMenu').classList.remove('open');document.getElementById('overlay').classList.remove('show')}
+const c=document.getElementById('matrix'),x=c.getContext('2d');c.width=innerWidth;c.height=innerHeight;const cols=Math.floor(c.width/18),y=Array(cols).fill(0);
+function draw
